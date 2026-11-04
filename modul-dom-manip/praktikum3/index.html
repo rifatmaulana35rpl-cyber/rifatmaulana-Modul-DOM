@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praktikum 3</title>
+    <style>
+        body {font-family: Arial; max-width: 400px; margin: 40px auto;}
+        li {margin: 8px 0;}
+        li button {margin-left: 10px;}
+    </style>
+</head>
+<body>
+    <h2>Daftar Belanja</h2>
+    <input type='text' id='barang' placeholder='Nama Barang' onkeydown="if(event.key === 'Enter') updateJumlah()">
+    <button id='btnTambah' onclick="updateJumlah()">Tambah</button>
+    <ul id='daftar'></ul>
+
+    <script>
+        const barang = document.getElementById('barang');
+        const btnTambah = document.getElementById('btnTambah');
+        const textJumlah = document.createElement('h6');
+        const daftar = document.getElementById('daftar');
+        const body = document.body;
+
+        function updateJumlah() {
+            if (barang.value === '') {
+                alert('Isi nama barang terlebih dahulu');
+                return;
+            }
+
+            const li = document.createElement('li');
+            li.textContent = barang.value;
+
+            const btnHapus = document.createElement('button');
+            btnHapus.textContent = 'Hapus';
+            btnHapus.addEventListener('click', () => {
+                li.remove();
+            });
+
+            li.appendChild(btnHapus);
+            daftar.appendChild(li);
+            barang.value = '';
+            textJumlah.textContent = `Jumlah Seluruh Barang: ${daftar.children.length}`;
+        };
+        body.appendChild(textJumlah);
+
+    </script>
+
+</body>
+</html>
