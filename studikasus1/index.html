@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Profil Sekolah</title>
+        <style>
+            body {font-family: Arial; padding: 30px; background: white; color: black;}
+            body.gelap {background: #1e1e1e; color: #f5f5f5;}
+        </style>
+    </head>
+    <body>
+        <h1>SMK Maju Jaya</h1>
+        <p>Jurusan Rekayasa Perangkat Lunak</p>
+        <button id="btnTema">Mode Gelap</button>
+        <div id="konten">
+            <h2>Profil Sekolah</h2>
+            <p>SMK Maju Jaya adalah sekolah menengah kejuruan yang berfokus pada pengembangan keterampilan di bidang teknologi dan rekayasa perangkat lunak. Sekolah ini memiliki fasilitas modern dan tenaga pengajar yang berpengalaman.</p>
+            <h2>Visi dan Misi</h2>
+            <p>Visi: Menjadi sekolah unggulan dalam bidang teknologi dan rekayasa perangkat lunak.</p>
+            <p>Misi: Mempersiapkan siswa untuk menghadapi tantangan industri teknologi melalui pendidikan berkualitas dan pengalaman praktis.</p>
+        </div>
+
+        <script>
+            const btnTema = document.getElementById('btnTema');
+
+            btnTema.addEventListener('click', () => {
+                document.body.classList.toggle('gelap');
+
+                if (document.body.classList.contains('gelap')) {
+                    btnTema.textContent = 'Mode Terang';
+                } else {
+                    btnTema.textContent = 'Mode Gelap';
+                }
+            });
+        </script>
+    </body>
+</html>

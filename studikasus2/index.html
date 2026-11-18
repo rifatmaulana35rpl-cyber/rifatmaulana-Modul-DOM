@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>To-Do-List</title>
+        <style>
+            body {font-family: Arial; max-width: 420px; margin: 40px auto;}
+            li {margin: 8px 0; cursor: pointer;}
+            li.selesai {text-decoration: line-through; color: gray;}
+            li button {margin-left: 10px;}
+        </style>
+    </head>
+    <body>
+        <h2>To-Do List</h2>
+        <input type="text" id="tugas" placeholder="Tulis tugas...">
+        <button id="tambah">Tambah</button>
+        <p>Tugas Belum Selesai: <b id="jumlah">0</b></p>
+        <ul id="daftar"></ul>
+        <button id="hapusSemua">Hapus Semua</button>
+
+        <script>
+            const tugas = document.getElementById('tugas');
+            const btnTambah = document.getElementById('tambah');
+            const daftar = document.getElementById('daftar');
+            const jumlah = document.getElementById('jumlah');
+            const btnHapusSemua = document.getElementById('hapusSemua');
+            function hitungTugas () {
+                const semua = document.querySelectorAll('#daftar li');
+                const selesai = document.querySelectorAll('#daftar li.selesai');
+                jumlah.textContent = semua.length - selesai.length;
+            }
+
+            function tambahTugas () {
+                if (tugas.value.trim() === '') {
+                    alert('Tugas tidak boleh kosong!');
+                    return;
+                }
+
+                const li = document.createElement('li');
+                const teks = document.createElement('span');
+                teks.textContent = tugas.value;
+
+                teks.addEventListener('click', () => {
+                    li.classList.toggle('selesai');
+                    hitungTugas();
+                });
+
+                const btnHapus = document.createElement('button');
+                btnHapus.textContent = 'Hapus';
+                btnHapus.addEventListener('click', () => {
+                    li.remove();
+                    hitungTugas();
+                });
+
+                li.appendChild(teks);
+                li.appendChild(btnHapus);
+                daftar.appendChild(li);
+
+                tugas.value = '';
+                hitungTugas();
+            }
+
+            btnTambah.addEventListener('click', tambahTugas);
+            tugas.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    tambahTugas();
+                }
+            });
+            function hapusSemuaTugas () {
+                const liSelesai = document.getElementsByClassName('selesai');
+                for (let i = liSelesai.length - 1; i >= 0; i--) {
+                    liSelesai[i].remove();
+                }
+                hitungTugas();
+            }
+            btnHapusSemua.addEventListener('click', hapusSemuaTugas);
+        </script>
+    </body>
+</html>

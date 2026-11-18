@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator BMI</title>
+    <style>
+        body {font-family: Arial; max-width: 350px; margin: 40px auto;}
+        input{display: block; margin: 10px 0; padding: 8px; width: 100%; box-sizing: border-box;}
+        #hasil {margin-top: 20px; font-size: 20px; font-weight: bold;}
+    </style>
+</head>
+<body>
+    <h2>Kalkulator BMI</h2>
+    <input type="number" id="berat" placeholder="Berat Badan (kg)">
+    <input type="number" id="tinggi" placeholder="Tinggi Badan (cm)">
+    <button id="btnHitung">Hitung</button>
+    <div id="hasil"></div>
+
+    <script>
+        const berat = document.getElementById('berat');
+        const tinggi = document.getElementById('tinggi');
+        const hasil = document.getElementById('hasil');
+
+        document.getElementById('btnHitung').addEventListener('click', () => {
+            const kg = Number(berat.value);
+            const m = Number(tinggi.value) / 100;
+
+            if (kg <= 0 || m <= 0) {
+                hasil.textContent = 'Masukkan berat dan tinggi yang valid.';
+                hasil.style.color = 'red';
+                return;
+            }
+
+            const bmi = kg / (m * m);
+            let kategori = '';
+
+            if (bmi < 18.5) {
+                kategori = 'Kurus';
+                hasil.style.color = 'blue';
+            } else if (bmi < 25) {
+                kategori = 'Normal';
+                hasil.style.color = 'green';
+            } else if (bmi < 30) {
+                kategori = 'Gemuk';
+                hasil.style.color = 'orange';
+            } else {
+                kategori = 'Obesitas';
+                hasil.style.color = 'red';
+            }
+
+            hasil.textContent = 'BMI: ' + bmi.toFixed(1) + ' (' + kategori + ')';
+        });
+    </script>
+</body>
+</html>
